@@ -1,6 +1,6 @@
 {
   "name": "vaultr",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -15,6 +15,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "eslint-config-vaultr": "workspace:*",
     "turbo": "latest"
   },
   "engines": {
