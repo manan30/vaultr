@@ -1,5 +1,9 @@
-import React from "react";
+import TraditionalAuthForm from "~/components/traditional-auth-form";
 
 export default function Register() {
-  return <div>Register</div>;
+  return (
+    <div>
+      <TraditionalAuthForm />
+    </div>
+  );
 }
