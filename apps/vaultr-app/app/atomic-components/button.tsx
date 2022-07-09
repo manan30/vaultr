@@ -14,16 +14,6 @@ export default function Button({
   clickHandler,
   children
 }: ButtonProps) {
-  const buttonBackgroundColor = (() => {
-    if (appearance === 'primary') {
-      return 'bg-primary';
-    }
-
-    if (appearance === 'secondary') {
-      return '';
-    }
-  })();
-
   return (
     <button
       className={cn(

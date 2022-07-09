@@ -1,6 +1,6 @@
-{
+module.exports = {
   "singleQuote": true,
   "trailingComma": "none",
   "jsxSingleQuote": true,
-  "plugins": ["prettier-plugin-tailwindcss"]
+   plugins: [require('prettier-plugin-tailwindcss')]
 }
