@@ -1,10 +1,10 @@
-import { Outlet } from "@remix-run/react";
+import { Outlet } from '@remix-run/react';
 
 export default function Authentication() {
   return (
-    <div className="h-screen w-screen grid place-items-center bg-brand">
-      <div className="w-[calc(100%-2rem)] sm:w-[40%] lg:w-[30%] mx-4 bg-slate-100 rounded-md shadow-lg p-4 flex flex-col">
-        <h1 className="font-semibold text-3xl text-center text-brand mb-6">
+    <div className='grid h-screen w-screen place-items-center bg-primary'>
+      <div className='mx-4 flex w-[calc(100%-2rem)] flex-col rounded-md bg-slate-100 p-4 shadow-lg sm:w-[40%] lg:w-[30%]'>
+        <h1 className='mb-6 text-center text-3xl font-semibold text-primary'>
           Vaultr
         </h1>
         <Outlet />
