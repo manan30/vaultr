@@ -1,24 +1,21 @@
 {
-  "name": "service",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
   "private": true,
-  "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "dev": "nest start --watch",
     "start": "nest start",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "prisma:push": "pnpm exec prisma db push",
+    "prisma:migrate-dev": "pnpm exec prisma migrate dev",
+    "prisma:migrate-prod": "pnpm exec prisma migrate deploy",
+    "prisma:studio": "pnpm exec prisma studio",
+    "mo": "pnpm exec nest mo",
+    "co": "pnpm exec nest co",
+    "s": "pnpm exec nest s"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
