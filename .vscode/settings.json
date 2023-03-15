@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["pnpm", "prebuild", "vaultr", "vite", "xstate"]
+  "cSpell.words": [
+    "clsx",
+    "pnpm",
+    "prebuild",
+    "tailwindcss",
+    "vaultr",
+    "vite",
+    "xstate"
+  ]
 }

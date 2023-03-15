@@ -1,28 +1,32 @@
 {
   "name": "vaultr-service",
   "version": "0.0.1",
-  "description": "Backend service for the Vaultr app",
+  "description": "Vaultr Backend",
   "author": "Manan Joshi",
   "private": true,
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
     "dev": "nest start --watch",
+    "start": "nest start",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "prisma:push": "pnpm exec prisma db push",
     "prisma:migrate-dev": "pnpm exec prisma migrate dev",
     "prisma:migrate-prod": "pnpm exec prisma migrate deploy",
-    "prisma:studio": "pnpm exec prisma studio"
+    "prisma:studio": "pnpm exec prisma studio",
+    "mo": "pnpm exec nest mo",
+    "co": "pnpm exec nest co",
+    "s": "pnpm exec nest s"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@prisma/client": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
