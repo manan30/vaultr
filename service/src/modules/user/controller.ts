@@ -1,13 +1,15 @@
 import {
   Body,
   Controller,
-  Get,
   Post,
   Res,
   Session,
   ValidationPipe,
 } from '@nestjs/common';
+
 import { Response } from 'express';
+import { Session as SessionType } from 'src/types/session';
+
 import { CreateUserDto } from './dto/create-user';
 import { UserService } from './service';
 
@@ -17,9 +19,9 @@ export class UserController {
 
   @Post('/create')
   async createUser(
-    @Body(new ValidationPipe()) body: CreateUserDto,
     @Res() res: Response,
-    @Session() session: Record<string, any>,
+    @Body(new ValidationPipe()) body: CreateUserDto,
+    @Session() session: SessionType,
   ) {
     const existingUser = await this.userService.findUserByEmail(body.email);
 
@@ -28,13 +30,8 @@ export class UserController {
     }
 
     const newUser = await this.userService.createUser(body);
-    console.log({ session, newUser });
+    session.user = { id: newUser.id };
 
     return res.json({ userId: newUser.id });
-  }
-
-  @Get('')
-  getHello() {
-    return this.userService.getUsers();
   }
 }
