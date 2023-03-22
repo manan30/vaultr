@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 
-import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 import * as session from 'express-session';
 
 import { PrismaService } from './common/services/prisma';
+import { PrismaSessionStore } from './common/session/prisma-session-store';
 import { RootModule } from './modules/root/module';
+import { IS_PRODUCTION, ONE_DAY } from './utils/constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(RootModule);
@@ -15,16 +16,18 @@ async function bootstrap() {
 
   app.use(
     session({
+      // TODO: Use environment variable
       secret: 'my-secret',
-      // cookie: {
-      //   maxAge: 7 * 24 * 60 * 60 * 1000, // ms
-      // },
+      name: 'vaultr.sid',
+      cookie: {
+        maxAge: ONE_DAY,
+        secure: IS_PRODUCTION ? true : false,
+        httpOnly: true,
+        sameSite: 'lax',
+      },
       resave: false,
       saveUninitialized: false,
-      store: new PrismaSessionStore(prismaService, {
-        dbRecordIdIsSessionId: false,
-        dbRecordIdFunction: undefined,
-      }),
+      store: new PrismaSessionStore(prismaService),
     }),
   );
 
