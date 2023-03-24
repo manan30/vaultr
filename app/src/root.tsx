@@ -24,7 +24,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className='h-screen w-screen bg-slate-300'>
+      <body className='h-screen w-screen bg-slate-100'>
         <div className='h-full w-full'>
           <Outlet />
         </div>
