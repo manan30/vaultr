@@ -1,3 +1,13 @@
 {
-  "cSpell.words": ["isbot", "nestjs", "quixo", "resave", "trivago", "Vaultr"]
+  "cSpell.words": [
+    "clsx",
+    "isbot",
+    "lucide",
+    "nestjs",
+    "quixo",
+    "redaxios",
+    "resave",
+    "trivago",
+    "Vaultr"
+  ]
 }
