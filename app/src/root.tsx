@@ -24,8 +24,10 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
-        <Outlet />
+      <body className='h-screen w-screen bg-slate-300'>
+        <div className='h-full w-full'>
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
