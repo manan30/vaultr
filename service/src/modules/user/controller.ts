@@ -36,7 +36,14 @@ export class UserController {
     const newUser = await this.userService.createUser(body);
     session.user = { id: newUser.id, email: newUser.email };
 
-    return res.json({ userId: newUser.id });
+    return res.json({
+      userId: newUser.id,
+      details: {
+        email: newUser.email,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+      },
+    });
   }
 
   @Post('/login')
