@@ -10,6 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+}
+
+enum Frequency {
+  DAILY
+  WEEKLY
+  BIWEEKLY
+  MONTHLY
+  BIMONTHLY
+  QUARTERLY
+  YEARLY
+}
+
 model Session {
   id        String   @id @default(uuid())
   sid       String   @unique
@@ -26,5 +42,40 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map(name: "users")
+  @@map(name: "user")
+}
+
+model Category {
+  id        String      @id @default(uuid())
+  name      String
+  Recurring Recurring[]
+
+  @@map(name: "category")
+}
+
+model Subscription {
+  id        String      @id @default(uuid())
+  status    Status
+  Recurring Recurring[]
+
+  @@map(name: "subscription")
+}
+
+model Recurring {
+  id             String       @id @default(uuid())
+  name           String
+  amount         Float
+  category       Category     @relation(fields: [categoryId], references: [id])
+  categoryId     String
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  subscriptionId String
+  frequency      Frequency
+  startDate      DateTime
+  endDate        DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  isDeleted      Boolean?
+  deletedAt      DateTime?
+
+  @@map(name: "recurring")
 }
