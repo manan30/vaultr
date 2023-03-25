@@ -8,7 +8,7 @@ import { RootModule } from './modules/root/module';
 import { IS_PRODUCTION, ONE_DAY } from './utils/constants';
 
 async function bootstrap() {
-  const app = await NestFactory.create(RootModule);
+  const app = await NestFactory.create(RootModule, { cors: true });
 
   app.setGlobalPrefix('api');
 

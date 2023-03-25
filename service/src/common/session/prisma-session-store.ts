@@ -49,7 +49,6 @@ export class PrismaSessionStore extends Store {
       const session = await this.prismaInstance.session.findFirst({
         where: { AND: [{ sid }, { expiresAt: { gt: new Date(Date.now()) } }] },
       });
-      console.log('get', session, callback);
 
       if (session) callback(null, JSON.parse(session.data));
       else callback(null, null);
