@@ -5,6 +5,11 @@ export type CreateUserPayload = {
   password: string;
 };
 
+export type LoginUserPayload = {
+  email: string;
+  password: string;
+};
+
 export type UserModel = {
   id: string;
   details: { firstName: string; lastName: string; email: string };

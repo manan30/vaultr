@@ -19,12 +19,15 @@ export async function action({ request }: ActionArgs) {
   }
 
   try {
-    const response = await createNewUser({
-      firstName,
-      lastName,
-      email,
-      password
-    });
+    const response = await createNewUser(
+      {
+        firstName,
+        lastName,
+        email,
+        password
+      }
+      // { headers: request.headers }
+    );
     return json(
       { user: response.data },
       { status: response.status, headers: response.headers as HeadersInit }
@@ -38,7 +41,7 @@ export async function action({ request }: ActionArgs) {
     }
   }
 
-  return json({ error: 'Something went wrong' }, { status: 400 });
+  return json({ error: 'Something went wrong' }, { status: 500 });
 }
 
 export default function Register() {
@@ -81,7 +84,11 @@ export default function Register() {
           </Button>
         </div>
       </Form>
-      {data?.error ? <>{data.error}</> : null}
+      {data?.error ? (
+        <div className='text-medium mt-4 rounded-md border border-solid border-red-500 p-4 text-red-500'>
+          {data.error}
+        </div>
+      ) : null}
     </>
   );
 }
