@@ -1,7 +1,9 @@
 import type { ActionArgs } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
 
+import type { AxiosHeaders } from 'axios';
 import axios from 'axios';
 import { loginUser } from '~/lib/api/users';
 import { Button } from '~/primitives/button';
@@ -21,13 +23,13 @@ export async function action({ request }: ActionArgs) {
       {
         email,
         password
-      }
-      // { headers: request.headers }
+      },
+      { headers: request.headers as unknown as AxiosHeaders }
     );
-    return json(
-      { user: response.data },
-      { status: response.status, headers: response.headers as HeadersInit }
-    );
+
+    return redirect('/dashboard', {
+      headers: response.headers as HeadersInit
+    });
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       return json(

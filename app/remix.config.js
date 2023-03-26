@@ -3,6 +3,6 @@ module.exports = {
   ignoredRouteFiles: ['**/.*'],
   appDirectory: 'src',
   future: {
-    v2_routeConvention: true
+    // v2_routeConvention: true
   }
 };
