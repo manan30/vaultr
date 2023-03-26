@@ -22,7 +22,7 @@ export default function AuthenticatedApp() {
       <div className='w-1/4 flex-1'>
         <Sidebar />
       </div>
-      <div className='w-3/4'>
+      <div className='w-3/4 py-6 px-8'>
         <Outlet />
       </div>
     </div>
