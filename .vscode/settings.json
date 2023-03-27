@@ -9,5 +9,6 @@
     "resave",
     "trivago",
     "Vaultr"
-  ]
+  ],
+  "eslint.workingDirectories": ["../app", "../service"]
 }
