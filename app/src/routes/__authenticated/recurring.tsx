@@ -1,3 +1,9 @@
+import type { LoaderArgs } from '@remix-run/node';
+import { json } from '@remix-run/node';
+import { useLoaderData, useSubmit } from '@remix-run/react';
+
+import axios from 'axios';
+import { getAllCategories } from '~/lib/api/category';
 import { Button } from '~/primitives/button';
 import {
   Dialog,
@@ -9,9 +15,37 @@ import {
   DialogTrigger
 } from '~/primitives/dialog';
 import { Input } from '~/primitives/input';
+import { Label } from '~/primitives/label';
 import { PlusCircle } from '~/primitives/lucide-icons';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '~/primitives/select';
+
+type LoaderData = {
+  error?: unknown;
+  categories: Awaited<ReturnType<typeof getAllCategories>>['data'];
+};
+
+export async function loader({ request }: LoaderArgs) {
+  try {
+    const categoriesResponse = await getAllCategories();
+    return json({ categories: categoriesResponse.data });
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      return json({ error: err });
+    }
+    return json({ error: err });
+  }
+}
 
 export default function Recurring() {
+  const { categories } = useLoaderData<LoaderData>();
+  const submit = useSubmit();
+
   return (
     <div>
       <Dialog>
@@ -30,8 +64,26 @@ export default function Recurring() {
           </DialogHeader>
           <div className='flex w-full flex-col items-start space-y-4'>
             <Input id='name' name='name' label='Name' />
-            <div className='flex items-center space-x-4'>
-              <Input id='amount' name='amount' label='Amount' />
+            <div className='flex w-full items-center space-x-4'>
+              <div className='flex w-full flex-col space-y-2'>
+                <Label>Category</Label>
+                <Select>
+                  <SelectTrigger className='w-full' placeholder='Category'>
+                    <SelectValue placeholder='' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map((category) => (
+                      <SelectItem
+                        key={category.id}
+                        value={category.name}
+                        className='capitalize'
+                      >
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <Input id='amount' name='amount' label='Amount' />
             </div>
             <div className='flex items-center space-x-4'>
