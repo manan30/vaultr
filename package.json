@@ -4,7 +4,8 @@
   "private": true,
   "workspaces": [
     "app",
-    "service"
+    "service",
+    "app-2"
   ],
   "scripts": {
     "build": "turbo run build",
