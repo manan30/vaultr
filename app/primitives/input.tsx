@@ -1,6 +1,9 @@
+'use client';
+
 import * as React from 'react';
 
 import { cn } from '~/utils/functions';
+
 import { Label } from './label';
 
 export type InputProps = {
