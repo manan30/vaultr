@@ -13,6 +13,6 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response.data);
   } catch (err) {
-    return NextResponse.json({ error: err });
+    return NextResponse.json({ error: err }, { status: 400 });
   }
 }

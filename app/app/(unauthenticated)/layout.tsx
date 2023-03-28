@@ -25,6 +25,8 @@ export default async function UnauthenticatedApp({
 }) {
   const { auth } = await isAuthenticated();
 
+  console.log({ auth });
+
   if (auth) redirect('/dashboard');
 
   return (
