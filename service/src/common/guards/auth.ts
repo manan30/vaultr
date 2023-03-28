@@ -15,6 +15,8 @@ export class AuthGuard implements CanActivate {
     const { session } = req;
     const { cookie, user } = session as unknown as Session;
 
+    console.log({ session, cookie, user });
+
     if (!session || !cookie || !cookie.expires || !user) {
       throw new UnauthorizedException();
     }

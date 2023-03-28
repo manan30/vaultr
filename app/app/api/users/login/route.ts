@@ -19,8 +19,6 @@ export async function POST(request: Request) {
       headers: response.headers as HeadersInit
     });
   } catch (error) {
-    console.log(error);
-
     if (axios.isAxiosError(error)) {
       return NextResponse.json(
         { error: error.response?.data.message },

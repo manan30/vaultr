@@ -15,8 +15,6 @@ export default function Register() {
             test: 'test'
           }
         );
-
-        console.log({ data });
       }}
     >
       <div className='flex w-full flex-col items-start space-y-6'>
