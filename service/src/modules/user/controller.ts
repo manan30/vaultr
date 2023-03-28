@@ -69,6 +69,13 @@ export class UserController {
 
     session.user = { id: existingUser.id, email: existingUser.email };
 
-    return res.send();
+    return res.json({
+      userId: existingUser.id,
+      details: {
+        email: existingUser.email,
+        firstName: existingUser.firstName,
+        lastName: existingUser.lastName,
+      },
+    });
   }
 }
