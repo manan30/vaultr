@@ -2,6 +2,8 @@ import axios from 'axios';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import Sidebar from './sidebar';
+
 export async function isAuthenticated() {
   try {
     const headerList = headers();
@@ -28,10 +30,11 @@ export default async function AuthenticatedApp({
   if (!auth) redirect('/login');
 
   return (
-    <div className='grid h-full w-full place-items-center px-6'>
-      <div className='mx-auto w-full rounded-md border border-solid border-slate-200 bg-white p-6 shadow-md outline-none sm:max-w-lg'>
-        {children}
+    <div className='flex h-full w-full'>
+      <div className='w-1/4 flex-1'>
+        <Sidebar />
       </div>
+      <div className='w-3/4 py-6 px-8'>{children}</div>
     </div>
   );
 }
