@@ -65,20 +65,25 @@ model Subscription {
 }
 
 model Recurring {
-  id             String       @id @default(uuid())
+  id             String        @id @default(uuid())
   name           String
   amount         Float
-  userId         String       @map("user_id")
-  categoryId     String       @map("category_id")
-  subscriptionId String       @map("subscription_id")
+  // variableAmount Boolean?     @map("variable_amount")
+  userId         String        @map("user_id")
+  // categoryId     String       @map("category_id")
+  // subscriptionId String       @map("subscription_id")
   frequency      Frequency
-  createdAt      DateTime     @default(now()) @map("created_at")
-  updatedAt      DateTime     @updatedAt @map("updated_at")
-  isDeleted      Boolean?     @map("is_deleted")
-  deletedAt      DateTime?    @map("deleted_at")
-  User           User         @relation(fields: [userId], references: [id])
-  Category       Category     @relation(fields: [categoryId], references: [id])
-  Subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+  isDeleted      Boolean?      @map("is_deleted")
+  deletedAt      DateTime?     @map("deleted_at")
+  User           User          @relation(fields: [userId], references: [id])
+  // Category       Category     @relation(fields: [categoryId], references: [id])
+  // Subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  Category       Category?     @relation(fields: [categoryId], references: [id])
+  categoryId     String?
+  Subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
+  subscriptionId String?
 
   @@map(name: "recurring")
 }

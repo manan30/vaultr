@@ -69,8 +69,6 @@ export class UserController {
 
     session.user = { id: existingUser.id, email: existingUser.email };
 
-    console.log({ session });
-
     return res.json({
       userId: existingUser.id,
       details: {

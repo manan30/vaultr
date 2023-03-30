@@ -1,1 +1,7 @@
-export { Repeat, LayoutDashboard, PlusCircle } from 'lucide-react';
+export {
+  Repeat,
+  LayoutDashboard,
+  PlusCircle,
+  ChevronDown,
+  CheckIcon
+} from 'lucide-react';
