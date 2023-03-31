@@ -18,10 +18,10 @@ enum Status {
 
 enum Frequency {
   DAILY
-  WEEKLY
   BIWEEKLY
-  MONTHLY
+  WEEKLY
   BIMONTHLY
+  MONTHLY
   QUARTERLY
   YEARLY
 }
@@ -34,14 +34,15 @@ model Session {
 }
 
 model User {
-  id        String      @id @default(uuid())
-  firstName String      @map("first_name")
-  lastName  String      @map("last_name")
-  email     String      @unique
-  password  String
-  createdAt DateTime    @default(now()) @map("created_at")
-  updatedAt DateTime    @updatedAt @map("updated_at")
-  Recurring Recurring[]
+  id          String        @id @default(uuid())
+  firstName   String        @map("first_name")
+  lastName    String        @map("last_name")
+  email       String        @unique
+  password    String
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+  Recurring   Recurring[]
+  Transaction Transaction[]
 
   @@map(name: "user")
 }
@@ -64,24 +65,36 @@ model Subscription {
   @@map(name: "subscription")
 }
 
+model Transaction {
+  id          String     @id @default(uuid())
+  isRecurring Boolean?   @map("is_recurring")
+  name        String
+  amount      Float
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  isDeleted   Boolean?   @map("is_deleted")
+  deletedAt   DateTime?  @map("deleted_at")
+  userId      String     @map("user_id")
+  User        User       @relation(fields: [userId], references: [id])
+  recurringId String?    @map("recurring_id")
+  Recurring   Recurring? @relation(fields: [recurringId], references: [id])
+}
+
 model Recurring {
   id             String        @id @default(uuid())
   name           String
-  amount         Float
-  // variableAmount Boolean?     @map("variable_amount")
+  priceHistory   Json
+  variableAmount Boolean?      @default(false) @map("variable_amount")
   userId         String        @map("user_id")
-  // categoryId     String       @map("category_id")
-  // subscriptionId String       @map("subscription_id")
   frequency      Frequency
   createdAt      DateTime      @default(now()) @map("created_at")
   updatedAt      DateTime      @updatedAt @map("updated_at")
   isDeleted      Boolean?      @map("is_deleted")
   deletedAt      DateTime?     @map("deleted_at")
   User           User          @relation(fields: [userId], references: [id])
-  // Category       Category     @relation(fields: [categoryId], references: [id])
-  // Subscription   Subscription @relation(fields: [subscriptionId], references: [id])
-  Category       Category?     @relation(fields: [categoryId], references: [id])
-  categoryId     String?
+  Category       Category      @relation(fields: [categoryId], references: [id])
+  categoryId     String        @map("category_id")
+  Transaction    Transaction[]
   Subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
   subscriptionId String?
 
