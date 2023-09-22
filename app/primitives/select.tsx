@@ -7,26 +7,36 @@ import { ChevronDown, CheckIcon } from '~/primitives/lucide-icons';
 
 import { Label } from './label';
 
-export function Select<TValue>({
-  value,
-  onChange,
-  options,
-  displayValue,
-  label
-}: {
+type SelectProps<TValue> = {
   options: { value: TValue; label: string }[];
   value: TValue;
   onChange: (value: TValue) => void;
   displayValue: string;
   label?: string;
-}) {
+  placeholder?: string;
+};
+
+export function Select<TValue>({
+  value,
+  onChange,
+  options,
+  displayValue,
+  label,
+  placeholder
+}: SelectProps<TValue>) {
   return (
     <div className='flex w-full flex-col space-y-2'>
       {label ? <Label>{label}</Label> : null}
       <Listbox value={value} onChange={onChange}>
         <div className='relative mt-1 w-full'>
-          <Listbox.Button className='flex h-10 w-full rounded-md border border-slate-300 bg-transparent py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'>
-            <span className='block truncate'>{displayValue}</span>
+          <Listbox.Button
+            className='ph-shown group flex h-10 w-full rounded-md border border-slate-300 bg-transparent py-2 px-3 text-sm
+            placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+            placeholder={placeholder}
+          >
+            <span className='block truncate'>
+              {displayValue || placeholder}
+            </span>
             <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
               <ChevronDown
                 className='h-5 w-5 text-gray-400'

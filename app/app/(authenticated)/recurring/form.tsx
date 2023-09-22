@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Button } from '~/primitives/button';
+import { Checkbox } from '~/primitives/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -46,6 +47,7 @@ export default function RecurringEntryForm() {
   });
 
   const frequencyVal = watch('frequency');
+  // const categoryVal = watch('category');
 
   return (
     <Dialog>
@@ -55,7 +57,15 @@ export default function RecurringEntryForm() {
           <span>Add</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[28rem]'>
+      <DialogContent
+        onEscapeKeyDown={(e) => {
+          e.preventDefault();
+        }}
+        onPointerDownOutside={(e) => {
+          e.preventDefault();
+        }}
+        className='sm:max-w-[28rem]'
+      >
         <DialogHeader>
           <DialogTitle>Add Entry</DialogTitle>
           <DialogDescription>
@@ -72,8 +82,20 @@ export default function RecurringEntryForm() {
             id='name'
             label='Name'
             error={errors.name?.message}
+            placeholder='Wave Credit Card'
             {...register('name', { required: 'Required field' })}
           />
+          <div className='flex items-center space-x-4'>
+            <Input
+              id='amount'
+              label='Amount'
+              error={errors.amount?.message}
+              type='tel'
+              placeholder='100.00'
+              {...register('amount', { required: 'Required field' })}
+            />
+            <Checkbox label='Variable amount' />
+          </div>
           <div className='flex w-full items-center space-x-4'>
             <Select
               value={frequencyVal}
@@ -90,6 +112,7 @@ export default function RecurringEntryForm() {
                   : ''
               }
               label='Frequency'
+              placeholder='Select Frequency'
             />
             {/* <div className='flex w-full flex-col space-y-2'>
               <Label>Category</Label>
@@ -117,10 +140,10 @@ export default function RecurringEntryForm() {
               {...register('amount', { required: 'Required field' })}
             /> */}
           </div>
-          <div className='flex items-center space-x-4'>
-            {/* <Input id='amount' name='amount' label='Amount' /> */}
-            {/* <Input id='amount' name='amount' label='Amount' /> */}
-          </div>
+          {/* <div className='flex items-center space-x-4'> */}
+          {/* <Input id='amount' name='amount' label='Amount' /> */}
+          {/* <Input id='amount' name='amount' label='Amount' /> */}
+          {/* </div> */}
           <div className='flex items-center space-x-4'>
             {/* <Input id='amount' name='amount' label='Amount' /> */}
             {/* <Input id='amount' name='amount' label='Amount' /> */}
